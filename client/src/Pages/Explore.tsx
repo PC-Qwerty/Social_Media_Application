@@ -36,7 +36,7 @@ const Explore = () => {
   const isShowSearchResults = searchValue !== "";
   const arePostsNotPresent =
     !isShowSearchResults &&
-    posts.pages.every((item) => item.documents.length === 0);
+    posts.pages.every((item) => item?.documents.length === 0);
   // arePostsPresent === true , there are no posts
 
   return (
@@ -72,7 +72,7 @@ const Explore = () => {
           <p className="text-light-2 mt-6 text-center w-full">End of Posts</p>
         ) : (
           posts.pages.map((item, index) => (
-            <GridPostList key={`page-${index}`} posts={item.documents} />
+            <GridPostList key={`page-${index}`} posts={item?.documents} />
           ))
         )}
       </div>
