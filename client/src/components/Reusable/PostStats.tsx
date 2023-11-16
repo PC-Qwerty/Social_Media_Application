@@ -8,19 +8,19 @@ import { checkIsLiked } from "@/lib/utils";
 import { Models } from "appwrite";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
-import CommentComponent from "./CommentComponent";
+// import CommentComponent from "./CommentComponent";
 
 type PostStatsProps = {
-  post: Models.Document;
+  post?: Models.Document;
   userID: string;
 };
 
 const PostStats = ({ post, userID }: PostStatsProps) => {
-  const likesList = post.likes.map((user: Models.Document) => user.$id);
+  const likesList = post?.likes.map((user: Models.Document) => user.$id);
   const [likes, setLikes] = useState(likesList);
   const [isSaved, setIsSaved] = useState(false);
-
-  const { mutate: likePost, isPending: isLikingPost } = useLikePost();
+  //isPending: isLikingPost
+  const { mutate: likePost } = useLikePost();
   const { mutate: savePost, isPending: isSavingPost } = useSavePost();
   const { mutate: unsavePost, isPending: isUnSavingPost } = useUnSavePost();
 
@@ -31,7 +31,7 @@ const PostStats = ({ post, userID }: PostStatsProps) => {
   };
 
   const savedPostDoc = currentUser?.save.find(
-    (record: Models.Document) => record.post.$id === post.$id
+    (record: Models.Document) => record.post.$id === post?.$id
   );
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const PostStats = ({ post, userID }: PostStatsProps) => {
       newLikes.push(userID);
     }
     setLikes(newLikes);
-    likePost({ postId: post.$id, likesArray: newLikes });
+    likePost({ postId: post?.$id || "", likesArray: newLikes });
   };
 
   const handleSave = (e: React.MouseEvent) => {
@@ -62,7 +62,7 @@ const PostStats = ({ post, userID }: PostStatsProps) => {
       return unsavePost({ savedPostId: savedPostDoc.$id });
       // return; // use this to make else block direct using using else statement
     } else {
-      savePost({ postId: post?.$id, userID: userID });
+      savePost({ postId: post?.$id || "", userID: userID });
       setIsSaved(true);
     }
   };

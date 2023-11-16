@@ -1,7 +1,5 @@
 // import { INavLink } from '@/dtypes';
 
-import { INavLink } from "@/dtypes";
-
 // import {HomeIcon}  from 'lucide-react';
 export const INITIAL_USER = {
   id: "",

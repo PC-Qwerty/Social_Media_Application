@@ -69,7 +69,7 @@ const PostPage = () => {
                   </Link>
                   <div className="flex-center gap-3 text-light-3">
                     <p className="subtle-semibold lg:small-regular">
-                      {timeConversion(post?.$createdAt)}
+                      {timeConversion(post?.$createdAt || "")}
                     </p>
                     -
                     <p className="subtle-semibold lg:small-regular">

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { LogOutIcon, UserIcon } from "lucide-react";
+import { LogOutIcon } from "lucide-react";
 import { useSignOutAccount } from "@/lib/React-Query/queriesAndMutations";
 import { useEffect } from "react";
 import { useUserContext } from "@/context/AuthContext";

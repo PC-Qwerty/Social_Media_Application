@@ -1,4 +1,4 @@
-import { INewPost, INewUser, IUpdatePost } from "@/dtypes";
+import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/dtypes";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 import { ID, Query } from "appwrite";
 
@@ -391,8 +391,8 @@ export async function updateUser(user: IUpdateUser) {
   const hasFileToUpdate = user.file.length > 0;
   try {
     let image = {
-      imageUrl: user.imageUrl,
-      imageId: user.imageId,
+      imageUrl: user.imageURL,
+      imageId: user.image,
     };
 
     if (hasFileToUpdate) {
@@ -406,7 +406,7 @@ export async function updateUser(user: IUpdateUser) {
         await deleteFile(uploadedFile.$id);
         throw Error;
       }
-
+      // @ts-ignore
       image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
     }
 
@@ -434,8 +434,8 @@ export async function updateUser(user: IUpdateUser) {
     }
 
     // Safely delete old file after successful update
-    if (user.imageId && hasFileToUpdate) {
-      await deleteFile(user.imageId);
+    if (user.image && hasFileToUpdate) {
+      await deleteFile(user.image);
     }
 
     return updatedUser;

@@ -20,7 +20,7 @@ const CommentComponent: React.FC<CommentComponentProps> = ({ postId }) => {
   //   const toggleComments = () => {
   //     setShowComments(!showComments);
   //   };
-
+  console.log(postId);
   return (
     <div className="relative">
       {/* <button

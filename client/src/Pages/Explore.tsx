@@ -7,7 +7,7 @@ import {
   useGetPosts,
   useSearchPosts,
 } from "@/lib/React-Query/queriesAndMutations";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const Explore = () => {
@@ -66,6 +66,7 @@ const Explore = () => {
         {isShowSearchResults ? (
           <SearchResults
             isSearching={isSearching}
+            // @ts-ignore
             searchedPosts={searchedPosts}
           />
         ) : arePostsNotPresent ? (
